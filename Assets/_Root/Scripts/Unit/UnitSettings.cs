@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using Abstractions.Unit;
 using UnityEngine;
 
-public class UnitSettings : MonoBehaviour
+namespace Unit
 {
-    // Start is called before the first frame update
-    void Start()
+    [CreateAssetMenu(fileName = nameof(UnitSettings), menuName = "ScriptableObject/" + nameof(UnitSettings))]
+    public class UnitSettings : ScriptableObject, IUnitSettings
     {
-        
+        [SerializeField] private float _speed;
+        [SerializeField] private float _health;
+
+        public float Speed => _speed;
+
+        public float Health => _health;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
