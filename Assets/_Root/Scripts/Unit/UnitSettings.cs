@@ -10,7 +10,6 @@ namespace Unit
         [SerializeField] private float _health;
 
         public float Speed => _speed;
-
         public float Health => _health;
     }
 
