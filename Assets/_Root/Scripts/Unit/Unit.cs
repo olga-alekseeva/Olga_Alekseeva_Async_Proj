@@ -1,39 +1,47 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Unit.Main
+
+public class Unit : MonoBehaviour
 {
-
-    public class Unit : MonoBehaviour
+    int health = 40;
+    int maxHealth = 100;
+    int bonusHealth = 5;
+    int endTime = 3;
+    float delayTime = 0.5f;
+    private Coroutine _coroutine;
+    private void Awake()
     {
-        int health = 40;
-
-        void Start()
-        {
-            ReceiveHealing();
-        }
-        public void ReceiveHealing()
-        {
-          
-            StartCoroutine(Healing());
-            
-            
-        }
-
-        IEnumerator Healing()
-        {
-            while(Time.time < 3 && health < 100)
-            {
-                yield return new WaitForSeconds(0.5f);
-                health = health + 5;
-                Debug.Log(health);
-            }
-            if (health >= 100)
-            {
-                StopAllCoroutines();
-            }
-        }
-
-
+        _coroutine = null;
     }
-}
+    public void ReceiveHealing()
+    {
+        if (_coroutine == null)
+        {
+            _coroutine = StartCoroutine(Healing());
+        }
+    }
+
+    IEnumerator Healing()
+    {
+            float passedTime = 0;
+        while (passedTime < endTime)
+        {
+            yield return new WaitForSeconds(delayTime);
+            passedTime += delayTime;
+            health += bonusHealth;
+            Debug.Log(health);
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+                break;
+            }
+        }
+        _coroutine = null;
+        }
+    }
+
+
+
+
+
