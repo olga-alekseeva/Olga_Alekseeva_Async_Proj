@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    int health = 40;
-    int maxHealth = 100;
-    int bonusHealth = 5;
+    public int health = 40;
+    public int maxHealth = 100;
+    public int bonusHealth = 5;
     int endTime = 3;
     float delayTime = 0.5f;
     private Coroutine _coroutine;
@@ -24,7 +24,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator Healing()
     {
-            float passedTime = 0;
+        float passedTime = 0;
         while (passedTime < endTime)
         {
             yield return new WaitForSeconds(delayTime);
@@ -38,8 +38,8 @@ public class Unit : MonoBehaviour
             }
         }
         _coroutine = null;
-        }
     }
+}
 
 
 
